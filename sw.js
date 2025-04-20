@@ -66,11 +66,11 @@ function recordLap() {
 
 // Restore the stopwatch state on page load
 window.onload = function () {
-    if (elapsedTime > 0 || running) {
-        if (running) {
-            startTime = Date.now() - elapsedTime; // Adjust start time to account for elapsed time
-            timer = setInterval(update, 1000); // Restart the timer if it was running
-        }
+    if (elapsedTime > 0) {
         update(); // Update the display with the saved elapsed time
+    }
+    if (running) {
+        startTime = Date.now() - elapsedTime; // Adjust start time to account for elapsed time
+        timer = setInterval(update, 1000); // Restart the timer if it was running
     }
 };
