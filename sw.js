@@ -2,6 +2,7 @@ let timer;
 let startTime = localStorage.getItem("startTime") ? parseInt(localStorage.getItem("startTime")) : null;
 let elapsedTime = localStorage.getItem("elapsedTime") ? parseInt(localStorage.getItem("elapsedTime")) : 0;
 let running = localStorage.getItem("running") === "true"; // Restore running state
+let laps = JSON.parse(localStorage.getItem("laps")) || []; // Restore laps
 
 function update() {
     const time = (running ? Date.now() - startTime : 0) + elapsedTime;
@@ -37,9 +38,11 @@ function resetStopwatch() {
     elapsedTime = 0;
     startTime = null;
     running = false;
+    laps = [];
     localStorage.setItem("elapsedTime", elapsedTime); // Reset elapsed time in storage
     localStorage.setItem("startTime", startTime); // Reset start time in storage
     localStorage.setItem("running", running); // Reset running state
+    localStorage.setItem("laps", JSON.stringify(laps)); // Clear laps in storage
     document.querySelector(".counter").innerText = "00:00:00";
     document.getElementById("laps").innerHTML = "";
 }
