@@ -14,7 +14,7 @@ function update() {
 
 function startStopwatch() {
     if (!running) {
-        startTime = Date.now();
+        startTime = Date.now() - elapsedTime; // Adjust start time to account for elapsed time
         localStorage.setItem("startTime", startTime); // Save start time
         timer = setInterval(update, 1000);
         running = true;
@@ -68,6 +68,7 @@ function recordLap() {
 window.onload = function () {
     if (elapsedTime > 0 || running) {
         if (running) {
+            startTime = Date.now() - elapsedTime; // Adjust start time to account for elapsed time
             timer = setInterval(update, 1000); // Restart the timer if it was running
         }
         update(); // Update the display with the saved elapsed time
